@@ -1,0 +1,78 @@
+{% load i18n %}
+<!DOCTYPE html>
+<html xmlns:fb="http://www.facebook.com/2008/fbml" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+
+  <title>
+    {% block title %} Assignment {% endblock %}
+  </title>
+  <meta name="description" content="{% block description %}{% endblock %}">
+
+  <!-- styles -->
+  <!-- <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"> -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B"
+    crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+  <!--[if lt IE 9]>
+<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+</head>
+
+<body>
+  <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="{% url 'login:index' %}">Assignment</a>
+    
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item" style="color:gray">
+            <a class="nav-link ml-auto"  href="{% url 'login:about' %}" class="nav-link">About</a>
+          </li>
+        <li class="nav-item" style="color:gray">
+          <a class="nav-link" href="{% url 'login:register' %}" class="nav-link">register</a>
+        </li>
+      
+      <!-- <ul class="navbar-nav ml-auto"> -->
+        <li class="nav-item ">
+          {% if user.is_authenticated %}
+          <a class="nav-link" href="{% url 'login:logout' %}">logout</a>
+          {% else %}
+          <a class="nav-link" href="{% url 'login:login' %}">Login</a>
+          {% endif %}
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+
+  <!-- Before the quiz content -->
+
+  <div class="container">
+    {% if messages %} {% for message in messages %}
+    <div class="alert alert-warning alert-dismissable" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true"><sup>&times;</sup></span>
+      </button>
+      {{message}}
+    </div>
+    {% endfor %} {% endif %} 
+
+  </div>
+
+  <!-- After the quiz content -->
+
+  <div class="jumbotron  ">
+  <div class="container">
+{% block content %} {% endblock %}
+</div>
+</div>
+
+</body>
+
+</html>
